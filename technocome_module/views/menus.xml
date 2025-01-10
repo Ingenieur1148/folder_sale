@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <menuitem id="menu_technocome_res_partner_root" name="Technichome" web_icon="technocome_module,static/description/icon.png" sequence="0" />
+        <menuitem id="technocome_record_menu_action" name="Status Folder Records" parent="menu_technocome_res_partner_root" action="status_folder_action" sequence="1" />
+    </data>
+</odoo>

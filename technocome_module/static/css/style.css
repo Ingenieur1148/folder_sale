@@ -1,0 +1,30 @@
+/* Vous pouvez définir des styles pour chaque état en fonction des attributs de décoration */
+[field][decoration-primary="true"] {
+    background-color: blue;
+    color: white;
+}
+
+[field][decoration-muted="true"] {
+    background-color: gray;
+    color: black;
+}
+
+[field][decoration-success="true"] {
+    background-color: green;
+    color: white;
+}
+
+[field][decoration-danger="true"] {
+    background-color: red;
+    color: white;
+}
+
+[field][decoration-warning="true"] {
+    background-color: #B0C4DE;
+    color: black;
+}
+
+[field][decoration-bf="true"] {
+    background-color: orange;
+    color: black;
+}
