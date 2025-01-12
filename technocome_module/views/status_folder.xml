@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="status_folder_view_tree" model="ir.ui.view">
+            <field name="name">status_folder_view_tree</field>
+            <field name="model">status.folder</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="state" widget="badge"
+                           decoration-primary="state == 'attente'"
+                           decoration-info="state == 'reception_a_compte'"
+                           decoration-muted="state == 'instruire'"
+                           decoration-success="state == 'encours'"
+                           decoration-danger="state == 'autorisations'"
+                           decoration-warning="state == 'octroyees'"
+                           decoration-bf="state == 'planifiee'"
+                           optional="show"/>
+                    <field name="partner_id"/>
+                    <field name="product_id"/>
+                    <field name="sale_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="status_folder_view_form" model="ir.ui.view">
+            <field name="name">status_folder_view_form</field>
+            <field name="model">status.folder</field>
+            <field name="arch" type="xml">
+                <form string="status_folder_form">
+                    <header>
+                        <button name="attente" class="btn btn-primary"
+                                type="object"
+                                string="1er acompte reçu"/>
+                        <button name="reception_a_compte" class="btn btn-info"
+                                type="object"
+                                string="A instruire"/>
+
+                        <button name="instruire" class="btn btn-secondary"
+                                type="object"
+                                string="En cours instruction"
+                        />
+
+
+                        <button name="encours" class="btn btn-success"
+                                type="object"
+                                string="Autorisations finalisées"
+                        />
+
+                        <button name="autorisations" class="btn btn-danger"
+                                type="object"
+                                string="Autorisations octroyées"/>
+
+                        <button name="octroyees" class="btn btn-warning"
+                                type="object"
+                                string="Pose planifiée"/>
+                        <button name="planifiee" class="btn btn-info"
+                                type="object"
+                                string="Pose effectuée"/>
+                        <button name="effectuee" class="btn btn-light"
+                                type="object"
+                                string="Subvention en cours"/>
+                        <button name="subvention_en_cours" class="btn btn-dark"
+                                type="object"
+                                string="Subvention finalisee"/>
+                        <button name="subvention_finalisee" class="btn btn-success"
+                                type="object"
+                                string="Subvention finalisee"/>
+
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="attente,reception_a_compte,instruire,encours,autorisations,octroyees,planifiee,effectuee,subvention_en_cours,subvention_finalisee"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="sale_id"/>
+                                <field name="product_id"/>
+                            </group>
+
+                        </group>
+                        <notebook>
+                            <page string="Document" name="document">
+                                <group>
+                                    <field name="document_attach" widget="many2many_binary"
+                                           invisible="state != 'attente'"
+                                    />
+                                    <field name="document_instruire" widget="many2many_binary"
+                                           invisible="state != 'instruire'"
+                                    />
+                                    <field name="document_encour" widget="many2many_binary"
+                                           invisible="state != 'encours'"
+                                    />
+                                    <field name="document_autorisations" widget="many2many_binary"
+                                           invisible="state != 'autorisations'"
+                                    />
+                                    <field name="document_octroyees" widget="many2many_binary"
+                                           invisible="state != 'octroyees'"
+                                    />
+                                    <field name="document_planifiee" widget="many2many_binary"
+                                           invisible="state != 'planifiee'"
+                                    />
+                                    <field name="document_effectuee" widget="many2many_binary"
+                                           invisible="state != 'effectuee'"
+                                    />
+                                    <field name="document_subvention_en_cours" widget="many2many_binary"
+                                           invisible="state != 'subvention en cours'"
+                                    />
+                                    <field name="document_subvention_finalisee" widget="many2many_binary"
+                                           invisible="state != 'subvention finalisee'"
+                                    />
+                                </group>
+
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="status_folder_action" model="ir.actions.act_window">
+            <field name="name">Status Folder Records</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">status.folder</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

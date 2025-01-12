@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_order_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="order_line" widget="many2many_tags" string="Products"/>
+                <field name="folder_state" widget="badge"
+                       decoration-primary="folder_state == 'attente'"
+                       decoration-muted="folder_state == 'instruire'"
+                       decoration-success="folder_state == 'encours'"
+                       decoration-danger="folder_state == 'autorisations'"
+                       decoration-warning="folder_state == 'octroyees'"
+                       decoration-bf="folder_state == 'planifiee'"/>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="view_sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="folder_state" readonly="0" invisible="not folder_state"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
+
