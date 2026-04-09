@@ -5,7 +5,7 @@
     'summary': 'Allow portal users to view and manage their quotations',
     'description': 'Portal Quotations for Odoo 18',
     'author': 'Randa Dev',
-    'website': 'https://tonsite.com',
+    'website': '',
     'license': 'OPL-1',
     'price': 49.99,
     'currency': 'EUR',
