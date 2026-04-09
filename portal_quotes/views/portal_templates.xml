@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!-- ================= HOME ================= -->
+<template id="portal_my_home" inherit_id="portal.portal_my_home">
+    <xpath expr="//div[hasclass('o_portal_docs')]/*[1]" position="before">
+        <t t-call="portal.portal_docs_entry">
+            <t t-set="url">/my/quotes</t>
+            <t t-set="title">My Quotations</t>
+            <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'"/>
+            <t t-set="text">View your quotations</t>
+            <t t-set="config_card" t-value="True"/>
+        </t>
+    </xpath>
+</template>
+
+    <!-- ================= BREADCRUMB FIX ================= -->
+<template id="portal_breadcrumbs_quote_form" inherit_id="portal.portal_breadcrumbs">
+    <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+        <t t-if="sale_quotation and sale_quotation.state == 'draft'">
+            <li class="breadcrumb-item">
+                <a href="/my/quotes">Quotations</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <span t-esc="sale_quotation.name"/>
+            </li>
+        </t>
+    </xpath>
+</template>
+
+    <!-- ================= LIST ================= -->
+    <template id="portal_my_quotes" name="My Quotations">
+        <t t-call="portal.portal_layout">
+            <t t-call="portal.portal_table">
+                <t t-set="title">My Quotations</t>
+
+                <t t-if="orders">
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Date</th>
+                            <th>Salesperson</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="orders" t-as="order">
+                            <tr>
+                               <td>
+    <a t-attf-href="/my/quote/#{order.id}">
+        <t t-esc="order.name"/>
+    </a>
+</td>
+                                <td><t t-esc="order.date_order"/></td>
+                                <td><t t-esc="order.user_id.name or 'Administrator'"/></td>
+<td>
+    <t t-esc="order.amount_total" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/>
+</td>                                <td>
+                                    <span class="badge bg-info">
+                                        <t t-esc="order.state"/>
+                                    </span>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </t>
+                <t t-else="">
+                    <div class="alert alert-warning text-center">
+                        No quotations found
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- ================= DETAIL ================= -->
+<template id="portal_quote_template" name="Quote Details">
+    <t t-call="portal.portal_layout">
+        <div class="container mt-4">
+            <div class="row mb-3">
+                <div class="col">
+                    <h4> Devis client - <t t-esc="sale_quotation.name"/></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 d-flex flex-column mb-3">
+                   <a t-att-href="'/my/quote/pdf/%s' % sale_quotation.id"
+   target="_blank"
+   class="btn btn-primary mb-2" style="background-color:#74BBCB !important;color:#ffffff !important;border: 1px solid #74BBCB !important;">
+    <i class="fa fa-download"></i> Download PDF
+</a>
+
+<a t-att-href="'/my/quote/pdf/%s' % sale_quotation.id"
+   target="_blank"
+   class="btn btn-secondary mb-2" style="background-color:#74BBCB !important;border: 1px solid #74BBCB !important;">
+    <i class="fa fa-print"></i> Print
+</a>
+                     <div class="card mt-3 p-3">
+    <h6>Total</h6>
+    <p class="fs-5">
+        <t t-esc="'{:,.2f}'.format(sale_quotation.amount_total)"/>
+        <t t-esc="sale_quotation.currency_id.symbol"/>
+    </p>
+</div>
+                </div>
+                <div class="col-md-9">
+                    <t t-call="sale.report_saleorder_document">
+                        <t t-set="doc" t-value="sale_quotation"/>
+                        <t t-set="docs" t-value="[sale_quotation]"/>
+                        <t t-set="doc_ids" t-value="[sale_quotation.id]"/>
+                        <t t-set="doc_model" t-value="'sale.order'"/>
+                        <t t-set="no_breadcrumbs" t-value="True"/>
+                    </t>
+                    <div class="mt-4">
+                        <hr/>
+                        <div id="salesale_quotation_order_communication">
+                            <h3>Historique de la communication</h3>
+                           <t t-call="portal.message_thread">
+    <t t-set="object" t-value="sale_quotation"/>
+    <t t-set="token" t-value="token"/>
+    <t t-set="pid" t-value="sale_quotation.partner_id.id"/>
+    <t t-set="hash" t-value="sale_quotation._sign_token(sale_quotation.partner_id.id)"/>
+    <t t-set="chatter_mode" t-value="'json'"/>
+</t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</template>
+</odoo>
