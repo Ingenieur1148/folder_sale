@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Delete Done Picking</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: #2d2d2d; background: #fff; }
+
+  .hero {
+    background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 60%, #9C27B0 100%);
+    color: #fff;
+    padding: 48px 40px 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .hero-icon {
+    flex-shrink: 0;
+    width: 96px; height: 96px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px;
+  }
+  .hero-text h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .hero-text p  { font-size: 15px; color: #E1BEE7; max-width: 520px; line-height: 1.6; }
+  .hero-badge {
+    display: inline-block;
+    margin-top: 14px;
+    background: #E53935;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .body { max-width: 760px; margin: 0 auto; padding: 40px 24px 60px; }
+
+  .warning-box {
+    background: #FFF3E0;
+    border-left: 4px solid #E65100;
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin-bottom: 36px;
+    font-size: 14px;
+    color: #5D4037;
+    line-height: 1.6;
+  }
+  .warning-box strong { color: #E65100; }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #4A148C;
+    margin: 36px 0 14px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #E1BEE7;
+  }
+
+  p { font-size: 14px; line-height: 1.75; color: #3d3d3d; margin-bottom: 12px; }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 8px 0 28px;
+  }
+  .feature-card {
+    background: #F3E5F5;
+    border-radius: 10px;
+    padding: 18px 16px;
+  }
+  .feature-card .icon { font-size: 24px; margin-bottom: 8px; }
+  .feature-card h3 { font-size: 13px; font-weight: 700; color: #4A148C; margin-bottom: 4px; }
+  .feature-card p  { font-size: 12px; color: #6A1B9A; margin: 0; line-height: 1.5; }
+
+  .steps { counter-reset: step; }
+  .step {
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 18px;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: #7B1FA2;
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+  }
+  .step-text { font-size: 14px; line-height: 1.65; padding-top: 3px; }
+  .step-text code {
+    background: #F3E5F5;
+    color: #6A1B9A;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 13px;
+    font-family: monospace;
+  }
+
+  .tech-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+  .tech-table th {
+    background: #4A148C;
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .tech-table td { padding: 8px 12px; border-bottom: 1px solid #F3E5F5; }
+  .tech-table tr:last-child td { border-bottom: none; }
+  .tech-table tr:nth-child(even) td { background: #FAF5FF; }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid #E1BEE7;
+    font-size: 12px;
+    color: #9E9E9E;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icon">🗑️</div>
+  <div class="hero-text">
+    <h1>Delete Done Picking</h1>
+    <p>Force-delete validated stock transfers that are stuck in <em>Done</em> state — including their stock moves, move lines, and valuation layers.</p>
+    <span class="hero-badge">⚠ Use with caution</span>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- WARNING -->
+  <div class="warning-box">
+    <strong>Important:</strong> This module allows permanent deletion of done stock pickings. This action is <strong>irreversible</strong> and may affect your inventory valuation and accounting records. Only use it when you are certain the picking must be removed (e.g. test data, mistaken entries in a controlled environment).
+  </div>
+
+  <!-- OVERVIEW -->
+  <h2>Overview</h2>
+  <p>
+    In standard Odoo, validated (Done) stock transfers cannot be deleted — only cancelled under strict conditions. This module adds a <strong>Force Delete</strong> button directly on the transfer form that lets authorised users bypass this restriction and permanently remove the picking and all related data.
+  </p>
+
+  <!-- FEATURES -->
+  <h2>Features</h2>
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">🔴</div>
+      <h3>Force Delete button</h3>
+      <p>Red button visible only on Done transfers, right in the header bar.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📦</div>
+      <h3>Full cleanup</h3>
+      <p>Deletes stock moves, move lines, and unreserves quantities before removal.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">💰</div>
+      <h3>Valuation cleanup</h3>
+      <p>Removes associated stock valuation layers to keep your costing clean.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">↩️</div>
+      <h3>Safe redirect</h3>
+      <p>After deletion, automatically redirects to the Transfers list view.</p>
+    </div>
+  </div>
+
+  <!-- HOW TO USE -->
+  <h2>How to use</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Install the module from <strong>Settings → Apps</strong>. Search for <code>Delete Done Picking</code>.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Open a stock transfer that is in <strong>Done</strong> state (Inventory → Transfers).</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Click the red <code>Force Delete</code> button in the header. Confirm the action.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">The transfer and all related records are permanently removed. You are redirected to the transfers list.</div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL -->
+  <h2>Technical details</h2>
+  <table class="tech-table">
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>Module name</td><td><code>delete_done_picking</code></td></tr>
+    <tr><td>Category</td><td>Inventory</td></tr>
+    <tr><td>Depends on</td><td>stock</td></tr>
+    <tr><td>Inherited model</td><td>stock.picking</td></tr>
+    <tr><td>New method</td><td>action_force_delete()</td></tr>
+    <tr><td>View modified</td><td>stock.view_picking_form (header)</td></tr>
+    <tr><td>Compatible versions</td><td>Odoo 16, 17</td></tr>
+    <tr><td>License</td><td>LGPL-3</td></tr>
+  </table>
+
+  <!-- CHANGELOG -->
+  <h2>Changelog</h2>
+  <p><strong>v1.0</strong> — Initial release. Force delete of done pickings with full stock move and valuation layer cleanup.</p>
+
+  <div class="footer">
+    Delete Done Picking · Inventory Module · Odoo Apps
+  </div>
+
+</div>
+</body>
+</html>
