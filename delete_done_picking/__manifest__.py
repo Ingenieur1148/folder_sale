@@ -14,7 +14,7 @@
         'views/stock_picking_view.xml',
     ],
     'images': [
-        'description/banner.png',
+        'static/description/banner.png',
     ],
     'installable': True,
     'application': True,
