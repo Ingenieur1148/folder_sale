@@ -221,58 +221,27 @@
     <div class="oe_row oe_spaced">
         <h2 class="oe_slogan" style="margin-bottom: 30px;">Screenshots</h2>
 
-        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap;">
 
-            <a href="#img1">
-                <img src="screen1.png" style="max-width:300px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.15); cursor:pointer;">
-            </a>
+            <img class="oe_screenshot"
+                 src="screen1.png"
+                 style="max-width: 320px; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.15); transition: 0.3s;"/>
 
-            <a href="#img2">
-                <img src="screen2.png" style="max-width:300px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.15); cursor:pointer;">
-            </a>
+            <img class="oe_screenshot"
+                 src="screen2.png"
+                 style="max-width: 320px; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.15); transition: 0.3s;"/>
 
-            <a href="#img3">
-                <img src="screen3.png" style="max-width:300px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.15); cursor:pointer;">
-            </a>
+            <img class="oe_screenshot"
+                 src="screen3.png"
+                 style="max-width: 320px; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.15); transition: 0.3s;"/>
 
         </div>
     </div>
 </section>
 
-<!-- POPUPS -->
-<div id="img1" class="lightbox">
-    <a href="#"><img src="screen1.png"></a>
-</div>
-
-<div id="img2" class="lightbox">
-    <a href="#"><img src="screen2.png"></a>
-</div>
-
-<div id="img3" class="lightbox">
-    <a href="#"><img src="screen3.png"></a>
-</div>
-
 <style>
-.lightbox {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    text-align: center;
-}
-
-.lightbox img {
-    margin-top: 5%;
-    max-width: 80%;
-    max-height: 80%;
-    border-radius: 10px;
-}
-
-.lightbox:target {
-    display: block;
+.oe_screenshot:hover {
+    transform: translateY(-5px);
 }
 </style>
 </div>
